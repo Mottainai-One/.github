@@ -1,16 +1,16 @@
 # Pull Request
 
-## 📋 Descrição
-Descreva de forma objetiva o que foi desenvolvido.
+## 📝 Description
+Describe objectively what was developed.
 
-Exemplo:
-- Implementação do CRUD de Produtos
-- Correção da autenticação JWT
-- Atualização da documentação
+Example:
+- Product CRUD implementation
+- JWT authentication fix
+- Documentation update
 
 ---
 
-## 🎯 Tipo da alteração
+## 🏷️ Type of Change
 
 - [ ] ✨ Feature
 - [ ] 🐛 Bug Fix
@@ -22,13 +22,13 @@ Exemplo:
 
 ---
 
-## 📌 Issue relacionada
+## 🔗 Related Issue
 
 Closes #
 
 ---
 
-## 🧪 Como testar
+## 🧪 How to Test
 
 1.
 2.
@@ -36,23 +36,23 @@ Closes #
 
 ---
 
-## 📸 Evidências (opcional)
+## 📸 Evidence (optional)
 
-Adicione prints, GIFs ou vídeos, se aplicável.
+Add prints, GIFs or videos, if applicable.
 
 ---
 
 ## ✅ Checklist
 
-- [ ] Código revisado
-- [ ] Segue os padrões do projeto
-- [ ] Não gera conflitos com a `develop`
-- [ ] Documentação atualizada (quando necessário)
-- [ ] Testado localmente
-- [ ] Não contém segredos (.env, tokens, senhas)
+- [ ] Code reviewed
+- [ ] Follows project standards
+- [ ] No conflicts with `develop`
+- [ ] Documentation updated (when necessary)
+- [ ] Tested locally
+- [ ] No secrets (.env, tokens, passwords)
 
 ---
 
-## 👥 Revisores
-<!-- pucca e garu-->
+## 👥 Reviewers
+
 @
