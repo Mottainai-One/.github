@@ -11,17 +11,14 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Org%20config-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mottainai-One/.github)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![Branch](https://img.shields.io/badge/branch%20padrão-main-blue?style=flat-square&logo=git&logoColor=white)](https://github.com/Mottainai-One/.github/tree/main)
-[![Status](https://img.shields.io/badge/main-apenas%20README%20%2B%20LICENSE-lightgrey?style=flat-square)](#status-limitações-e-riscos)
 
 <br/>
 
 [Visão geral](#visão-geral) •
 [Arquitetura](#arquitetura) •
 [Conteúdo](#estrutura-do-repositório) •
-[Branches](#trabalho-fora-da-main) •
 [Como contribuir](#configuração-e-uso) •
 [Segurança](#segurança-e-operação) •
-[Status](#status-limitações-e-riscos) •
 [Referências](#referências)
 
 </div>
@@ -69,11 +66,11 @@ flowchart TB
     style W stroke-dasharray: 5 5
 ```
 
-| Tipo de arquivo | Comportamento esperado no GitHub | Status neste repo |
-|---|---|---|
-| Arquivos de saúde da comunidade | Herdados por repos sem versão própria | Não estão na `main` |
-| Template de pull request | Herdado por repos sem template próprio | Só nas branches `develop`, `feature/pr-template` e `feature/render-test` |
-| Workflows reutilizáveis | Não são herdados; o repo consumidor precisa chamá-los | Não existem |
+| Tipo de arquivo | Comportamento esperado no GitHub  |
+|---|--- |
+| Arquivos de saúde da comunidade | Herdados por repos sem versão própria  |
+| Template de pull request | Herdado por repos sem template próprio  |
+| Workflows reutilizáveis | Não são herdados; o repo consumidor precisa chamá-los  |
 
 <sub>O comportamento de herança é o documentado pelo GitHub para repositórios `.github` de organização. Ele não foi testado na prática nesta análise.</sub>
 
@@ -119,47 +116,6 @@ flowchart TB
 
 ---
 
-## Trabalho fora da `main`
-
-| Branch | Último commit | Conteúdo | PR |
-|---|---|---|---|
-| `develop` | 2026-08-04 | Arquivos de comunidade vazios, `pull_request_template.md`, `push.ps1`, `render-test.txt` | Recebeu as PRs #5 e #6 (mescladas em `develop`) |
-| `feature/pr-template` | 2026-08-03 | Template de PR + arquivos de comunidade vazios | #5, mesclada em `develop` |
-| `feature/render-test` | 2026-08-04 | Versão em inglês do template + `push.ps1` | #6, mesclada em `develop` |
-| `docs/readme-standardization` | 2026-10-26 | README em português explicando o estado atual | #7, fechada sem merge e substituída pela documentação proposta |
-
-<details>
-<summary><b>O que o template de PR da branch <code>develop</code> pede</b></summary>
-
-<br/>
-
-Seções: **Description**, **Type of Change** (Feature, Bug Fix, Refactor, Documentation, Performance, Test, Chore), **Related Issue** (`Closes #`), **How to Test**, **Evidence** (opcional) e **Checklist**:
-
-- Code reviewed
-- Follows project standards
-- No conflicts with `develop`
-- Documentation updated (when necessary)
-- Tested locally
-- No secrets (.env, tokens, passwords)
-
-</details>
-
-<details>
-<summary><b>O que o <code>push.ps1</code> faz</b></summary>
-
-<br/>
-
-1. Executa `git push` repassando os argumentos recebidos.
-2. Descobre a branch atual e o `owner/repo` a partir do `remote.origin.url`.
-3. Por até 30 tentativas, com 2 segundos de intervalo, consulta `gh pr list --head <branch> --state open`.
-4. Quando encontra uma PR aberta, imprime a URL dela.
-
-Ele não cria PR. Só espera que alguma automação (o `Mottainai-PR-Bot`, pelo histórico de commits) crie a PR e mostra o link.
-
-</details>
-
----
-
 ## Configuração e uso
 
 Não há build, dependência nem execução local. Para contribuir:
@@ -190,25 +146,6 @@ Não há workflows, testes ou gates neste repositório, em nenhuma das branches 
 | `SECURITY.md` | Existe só na `develop`, e **vazio**. A org não tem canal documentado para reportar vulnerabilidades. |
 | Histórico | O commit `dde8f1e` na `develop` tem a mensagem *"test PR creation after secret fix"*. Isso sugere um ajuste de segredo na automação de PRs. O conteúdo da correção não está neste repositório. |
 | `push.ps1` | Depende do `gh` autenticado na máquina de quem roda. Não manipula credenciais diretamente. |
-
----
-
-## Status, limitações e riscos
-
-| Item | Status |
-|---|:---:|
-| README e LICENSE na `main` | ![ok](https://img.shields.io/badge/-pronto-success?style=flat-square) |
-| Template de PR | ![branch](https://img.shields.io/badge/-só%20em%20develop-orange?style=flat-square) |
-| CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT | ![empty](https://img.shields.io/badge/-vazios%20em%20develop-red?style=flat-square) |
-| Templates de issue | ![none](https://img.shields.io/badge/-não%20existem-lightgrey?style=flat-square) |
-| Workflows reutilizáveis | ![none](https://img.shields.io/badge/-não%20existem-lightgrey?style=flat-square) |
-
-> [!WARNING]
-> **Riscos práticos**
-> 1. **Arquivos vazios viram padrão da org.** Se `develop` for mesclada como está, todo repo sem arquivo próprio vai exibir `CONTRIBUTING`, `SECURITY` etc. **vazios**. Isso é pior que não ter nada.
-> 2. **Templates divergentes.** O `Mottainai-Api-SQL-Cliente` tem um template de PR próprio, em português e com critérios cobrados pela CI, numa branch. O template daqui é em inglês e tem outro checklist. Sem alinhamento, cada repo segue um padrão diferente.
-> 3. **Fluxo `develop` → `main` parado.** A `develop` recebeu PRs em agosto de 2026 e nunca foi promovida.
-> 4. **`render-test.txt`** é um artefato de teste e não deveria ir para a `main`.
 
 ---
 
